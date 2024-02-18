@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import data from "../database/data";
 function Question() {
   const options = () => {
-    console.log("Radio Button");
+    // console.log("Radio Button");
   };
   const question = data[0];
   useEffect(() => {
-    console.log(question);
+    // console.log(question);
   });
   return (
     <div className="questions">
