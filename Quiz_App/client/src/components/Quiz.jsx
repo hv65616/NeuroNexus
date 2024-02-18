@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Question from "./Question";
+import { useSelector } from "react-redux";
 function Quiz() {
+  const state = useSelector((state) => state);
+  useEffect(() => {
+    console.log(state);
+  });
   const prevQuestion = () => {
-    console.log("Prev Buttton");
+    // console.log("Prev Buttton");
   };
   const nextQuestion = () => {
-    console.log("Next button");
+    // console.log("Next button");
   };
   return (
     <div className="container">
