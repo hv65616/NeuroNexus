@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../database/data";
+import { useFetchquestions } from "../hooks/FetchQuestions";
 function Question() {
+  const [checked, setChecked] = useState(undefined);
+  const [{ Loading, apiData, serverError }] = useFetchquestions();
+  const question = data[0];
   const options = () => {
     // console.log("Radio Button");
   };
-  const question = data[0];
   useEffect(() => {
     // console.log(question);
+    // console.log(Loading);
+    // console.log(apiData);
+    // console.log(serverError);
   });
   return (
     <div className="questions">
