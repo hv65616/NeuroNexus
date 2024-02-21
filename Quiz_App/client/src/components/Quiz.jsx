@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 function Quiz() {
   const state = useSelector((state) => state);
   useEffect(() => {
-    console.log(state);
+    // console.log(state);
   });
   const prevQuestion = () => {
     // console.log("Prev Buttton");
