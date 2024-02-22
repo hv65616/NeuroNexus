@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import data from "../database/data";
 import { useFetchquestions } from "../hooks/FetchQuestions";
 import { useSelector } from "react-redux";
-function Question() {
+function Question({ onchecked }) {
   const [checked, setChecked] = useState(undefined);
   const [{ Loading, apiData, serverError }] = useFetchquestions();
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   );
   const question = data[0];
-  const options = () => {
+  const options = (i) => {
     // console.log("Radio Button");
+    // console.log(i);
+    onchecked(i);
   };
   useEffect(() => {
-    console.log(questions);
+    // console.log(questions);
     // console.log(Loading);
     // console.log(apiData);
     // console.log(serverError);
@@ -32,12 +34,14 @@ function Question() {
               value={true}
               name="options"
               id={`q${i}-option`}
-              onChange={options()}
+              onChange={() => {
+                options(i);
+              }}
             />
             <label htmlFor={`q${i}-option`} className="text-primary">
               {q}
             </label>
-            <div className="check checked"></div>
+            <div className="check"></div>
           </li>
         ))}
       </ul>
