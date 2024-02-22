@@ -1,16 +1,19 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 export const resultreducer = createSlice({
-    name:"result",
-    initialState:{
-        userId:null,
-        result:[]
+  name: "result",
+  initialState: {
+    userId: null,
+    result: [],
+  },
+  reducers: {
+    setuserid: (state, action) => {
+      state.userId = action.payload;
     },
-    reducers:{
-        setuserid:(state,action)=>{
-            state.userId= action.payload;
-        }
-    }
-})
+    pushResultAction: (state, action) => {
+      state.result.push(action.payload);
+    },
+  },
+});
 
-export const {setuserid} = resultreducer.actions;
-export default resultreducer.reducer
+export const { setuserid, pushResultAction } = resultreducer.actions;
+export default resultreducer.reducer;
