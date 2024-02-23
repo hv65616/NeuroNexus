@@ -12,8 +12,15 @@ export const resultreducer = createSlice({
     pushResultAction: (state, action) => {
       state.result.push(action.payload);
     },
+    resetResultAction: () => {
+      return {
+        userId: null,
+        result: [],
+      };
+    },
   },
 });
 
-export const { setuserid, pushResultAction } = resultreducer.actions;
+export const { setuserid, pushResultAction, resetResultAction } =
+  resultreducer.actions;
 export default resultreducer.reducer;
