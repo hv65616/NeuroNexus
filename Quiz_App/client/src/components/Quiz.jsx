@@ -4,6 +4,7 @@ import { moveNextQuestion } from "../hooks/FetchQuestions";
 import { movePrevQuestion } from "../hooks/FetchQuestions";
 import { useSelector, useDispatch } from "react-redux";
 import { pushAnswer } from "../hooks/setResult";
+import { Navigate } from "react-router-dom";
 function Quiz() {
   const [check, setChecked] = useState(undefined);
   const state = useSelector((state) => state);
@@ -12,7 +13,9 @@ function Quiz() {
     // console.log(state.questions.trace);
     // console.log(state.questions);
     // console.log(state.questions.queue.length);
-    console.log(state);
+    // console.log(state);
+    // console.log(state.questions.queue.length);
+    // console.log(state.result.result.length);
   });
   const prevQuestion = () => {
     // console.log("Prev Buttton");
@@ -22,7 +25,7 @@ function Quiz() {
   };
   const nextQuestion = () => {
     // console.log("Next button");
-    if (state.questions.trace < state.questions.queue.length - 1) {
+    if (state.questions.trace < state.questions.queue.length) {
       dispatch(moveNextQuestion());
       dispatch(pushAnswer(check));
     }
@@ -31,6 +34,13 @@ function Quiz() {
     // console.log(checked);
     setChecked(checked);
   };
+
+  if (
+    state.result.result.length &&
+    state.result.result.length >= state.questions.queue.length
+  ) {
+    return <Navigate to={"/result"} replace="true"></Navigate>;
+  }
   return (
     <div className="container">
       <h1 className="title text-light">Quiz Application</h1>
