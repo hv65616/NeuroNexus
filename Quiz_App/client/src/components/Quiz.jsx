@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { pushAnswer } from "../hooks/setResult";
 import { Navigate } from "react-router-dom";
 function Quiz() {
-  const [check, setChecked] = useState(undefined);
+  const [checked, setChecked] = useState(undefined);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,6 +14,7 @@ function Quiz() {
     // console.log(state.questions);
     // console.log(state.questions.queue.length);
     // console.log(state);
+    // console.log(state.result.result);
     // console.log(state.questions.queue.length);
     // console.log(state.result.result.length);
   });
@@ -27,7 +28,9 @@ function Quiz() {
     // console.log("Next button");
     if (state.questions.trace < state.questions.queue.length) {
       dispatch(moveNextQuestion());
-      dispatch(pushAnswer(check));
+      if (state.result.result.length <= state.questions.trace) {
+        dispatch(pushAnswer(checked));
+      }
     }
   };
   const onchecked = (checked) => {
@@ -46,9 +49,14 @@ function Quiz() {
       <h1 className="title text-light">Quiz Application</h1>
       <Question onchecked={onchecked}></Question>
       <div className="grid">
-        <button className="btn prev" onClick={prevQuestion}>
-          Prev
-        </button>
+        {state.questions.trace > 0 ? (
+          <button className="btn prev" onClick={prevQuestion}>
+            Prev
+          </button>
+        ) : (
+          <div></div>
+        )}
+
         <button className="btn next" onClick={nextQuestion}>
           Next
         </button>
