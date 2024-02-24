@@ -6,3 +6,11 @@ export const pushAnswer = (result) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateResult = (index) => async (dispatch) => {
+  try {
+    dispatch(Action.updateResultActions(index));
+  } catch (error) {
+    console.log(error);
+  }
+};
