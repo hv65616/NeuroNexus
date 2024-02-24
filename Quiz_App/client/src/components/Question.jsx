@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
-import data from "../database/data";
 import { useFetchquestions } from "../hooks/FetchQuestions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateResult } from "../hooks/setResult";
 function Question({ onchecked }) {
   const [checked, setChecked] = useState(undefined);
+  const { trace } = useSelector((state) => state.questions);
+  const result = useSelector((state) => state.result.result);
   const [{ Loading, apiData, serverError }] = useFetchquestions();
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   );
-  const question = data[0];
+  const dispatch = useDispatch();
   const options = (i) => {
     // console.log("Radio Button");
     // console.log(i);
     onchecked(i);
+    setChecked(i);
+    dispatch(updateResult({ trace, checked }));
   };
   useEffect(() => {
     // console.log(questions);
     // console.log(Loading);
     // console.log(apiData);
     // console.log(serverError);
-  });
+    dispatch(updateResult({ trace, checked }));
+  }, [checked]);
+  // console.log({ trace, checked });
   if (Loading) return <h3 className="text-light">IsLoading</h3>;
   if (serverError)
     return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
@@ -41,7 +47,9 @@ function Question({ onchecked }) {
             <label htmlFor={`q${i}-option`} className="text-primary">
               {q}
             </label>
-            <div className="check"></div>
+            <div
+              className={`check ${result[trace] === i ? "checked" : ""}`}
+            ></div>
           </li>
         ))}
       </ul>
