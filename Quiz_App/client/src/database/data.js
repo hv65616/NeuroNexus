@@ -28,5 +28,5 @@ const data = [
     options: ["stringify()", "parse()", "convert()"],
   },
 ];
-
-export default data;
+const answers = [0, 1, 2, 1, 0];
+export { data, answers };
