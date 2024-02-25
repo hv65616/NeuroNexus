@@ -8,9 +8,11 @@ export const questionreducer = createSlice({
   },
   reducers: {
     startExamActions: (state, action) => {
+      let {question,answers} = action.payload;
       return {
         ...state,
-        queue: action.payload,
+        queue: question,
+        answers: answers,
       };
     },
     moveNextAction: (state) => {
