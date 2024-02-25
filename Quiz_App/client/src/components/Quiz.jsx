@@ -32,6 +32,7 @@ function Quiz() {
         dispatch(pushAnswer(checked));
       }
     }
+    setChecked(undefined)
   };
   const onchecked = (checked) => {
     // console.log(checked);
