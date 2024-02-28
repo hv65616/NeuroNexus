@@ -37,13 +37,35 @@ const dropQuestions = async (req, res) => {
   }
 };
 const getAllResult = async (req, res) => {
-  res.json("Result get");
+  try {
+    const result = await Result.find();
+    res.json(result);
+  } catch (error) {
+    res.json({ error });
+  }
 };
 const storeResult = async (req, res) => {
-  res.json("Result store");
+  try {
+    const { username, result, attempts, points, achived } = req.body;
+    if (!username && !result) throw new Error("Data Not Provided....!!!");
+    Result.create({ username, result, attempts, points, achived }).then(
+      (err, data) => {
+        res.json({ msg: "Result Saved" });
+      }
+    );
+  } catch (error) {
+    res.json({ error });
+  }
 };
 const deleteAllResult = async (req, res) => {
-  res.json("Result Delete");
+  try {
+    await Result.deleteMany();
+    res.json({
+      msg: "Result Deleted",
+    });
+  } catch (error) {
+    res.json({ error });
+  }
 };
 module.exports = {
   getQuestions,
