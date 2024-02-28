@@ -1,11 +1,40 @@
+const Questions = require("../model/questionSchema");
+const Result = require("../model/resultSchema");
+const { questions, answers } = require("../database/data");
 const getQuestions = async (req, res) => {
-  res.json("Questions API");
+  try {
+    const questions = await Questions.find();
+    res.json(questions);
+  } catch (error) {
+    res.json({
+      errorMsg: error,
+    });
+  }
 };
 const insertQuestions = async (req, res) => {
-  res.json("Questions post");
+  try {
+    await Questions.insertMany({ questions: questions, answers: answers }).then(
+      (err, data) => {
+        res.json({ msg: "Questions saved successfully" });
+      }
+    );
+  } catch (error) {
+    res.json({
+      errorMsg: error,
+    });
+  }
 };
 const dropQuestions = async (req, res) => {
-  res.json("Questions drop");
+  try {
+    await Questions.deleteMany();
+    res.json({
+      msg: "Questions deleted successfully",
+    });
+  } catch (error) {
+    res.json({
+      errorMsg: error,
+    });
+  }
 };
 const getAllResult = async (req, res) => {
   res.json("Result get");
@@ -22,5 +51,5 @@ module.exports = {
   dropQuestions,
   getAllResult,
   storeResult,
-  deleteAllResult
+  deleteAllResult,
 };
