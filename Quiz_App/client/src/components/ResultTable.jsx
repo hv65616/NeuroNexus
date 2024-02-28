@@ -4,7 +4,7 @@ function ResultTable() {
   const [data, setData] = useState([]);
   useEffect(() => {
     getServerData(
-      `${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`,
+      "https://quizappbackend-yomj.onrender.com/api/result",
       (res) => setData(res)
     );
   });
