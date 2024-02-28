@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 import "../styles/Result.css";
 import { Link } from "react-router-dom";
 import ResultTable from "../components/ResultTable";
@@ -10,19 +10,34 @@ import {
   earnPointsNumber,
   checkresult,
 } from "../helper/helper";
+import { usePublishResult } from "../hooks/setResult";
 function Result() {
   const {
     questions: { answers, queue },
     result: { result, userId },
   } = useSelector((state) => state);
-  useEffect(() => {
-    console.log(earnPoints);
-    console.log(flag);
-  });
+  // useEffect(() => {
+  //   console.log(earnPoints);
+  //   console.log(flag);
+  // });
   const totalPoints = queue.length * 10;
   const attempts = attemptsNumber(result);
   const earnPoints = earnPointsNumber(result, answers);
   const flag = checkresult(totalPoints, earnPoints);
+  usePublishResult({
+    result,
+    username: userId,
+    attempts,
+    points: earnPoints,
+    achived: flag ? "Passed" : "Failed",
+  });
+  // console.log({
+  //   result,
+  //   username: userId,
+  //   attempts,
+  //   points: earnPoints,
+  //   achived: flag ? "Passed" : "Failed",
+  // });
   const dispatch = useDispatch();
   const onrestart = () => {
     dispatch(resetAllAction());
