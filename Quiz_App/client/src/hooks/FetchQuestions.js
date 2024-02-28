@@ -14,7 +14,7 @@ export const useFetchquestions = () => {
     (async () => {
       try {
         const [{ questions, answers }] = await getServerData(
-          `${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`,
+          "https://quizappbackend-yomj.onrender.com/api/questions",
           (data) => data
         );
         // console.log({ questions, answers });

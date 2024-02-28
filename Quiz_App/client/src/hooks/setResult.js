@@ -20,9 +20,10 @@ export const usePublishResult = (resultData) => {
   const { result, username } = resultData;
   (async () => {
     try {
-      if (result.length<=0 && !username) throw new Error("Couldn't get Result");
+      if (result.length <= 0 && !username)
+        throw new Error("Couldn't get Result");
       await postServerData(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`,
+        "https://quizappbackend-yomj.onrender.com/api/result",
         resultData,
         (data) => data
       );
