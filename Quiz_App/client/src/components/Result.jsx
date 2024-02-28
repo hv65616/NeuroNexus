@@ -50,7 +50,7 @@ function Result() {
       <div className="result flex-center">
         <div className="flex">
           <span>Username</span>
-          <span className="bold">{userId}</span>
+          <span className="bold">Himanshu Verma</span>
         </div>
         <div className="flex">
           <span>Total Quiz Point</span>
