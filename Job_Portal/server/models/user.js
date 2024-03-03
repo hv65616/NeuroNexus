@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     maxLength: [30, "Name cannot exceed  30 characters"],
   },
   email: {
-    type: Sting,
+    type: String,
     required: [true, "Please provide email"],
     validate: [validator.isEmail, "Please provide a valid email"],
   },
@@ -30,16 +30,17 @@ const userSchema = new mongoose.Schema({
     enum: ["Job Seeker", "Employer"],
   },
   createdAt: {
-    type: Data,
+    type: Date,
     default: Date.now(),
   },
 });
 
-userSchema.pre("save", async (next) => {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    next();
+    return next();
   } else {
     this.password = await bcrypt.hash(this.password, 10);
+    next();
   }
 });
 
