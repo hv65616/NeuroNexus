@@ -21,4 +21,25 @@ const register = catchAsync(async (req, res, next) => {
   sendToken(user, 200, res, "User Registered Successfully");
 });
 
-module.exports = register;
+const login = catchAsync(async (req, res, next) => {
+  const { email, password, role } = req.body;
+  if (!email || !password || !role) {
+    return next(
+      new ErrorHandler("Please provide email,password and role", 400)
+    );
+  }
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    return next(new ErrorHandler("Invalid email or password", 400));
+  }
+  const ispasswordmatch = await user.comparePassword(password);
+  if (!ispasswordmatch) {
+    return next(new ErrorHandler("Invalid email or password", 400));
+  }
+  if (user.role !== role) {
+    return next(new ErrorHandler("User with this role not found", 400));
+  }
+  sendToken(user, 200, res, "User Logged in successfully");
+});
+
+module.exports = { register, login };
