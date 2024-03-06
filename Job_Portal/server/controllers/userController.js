@@ -42,4 +42,17 @@ const login = catchAsync(async (req, res, next) => {
   sendToken(user, 200, res, "User Logged in successfully");
 });
 
-module.exports = { register, login };
+const logout = catchAsync(async (req, res, next) => {
+  res
+    .status(201)
+    .cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    })
+    .json({
+      success: true,
+      msg: "User logout successfully",
+    });
+});
+
+module.exports = { register, login, logout };
