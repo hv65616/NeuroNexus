@@ -104,4 +104,24 @@ const updateJob = catchAsync(async (req, res, next) => {
     msg: "Job Updated Successfully",
   });
 });
-module.exports = { getAllJobs, postJob, getMyJobs, updateJob };
+
+const deleteJob = catchAsync(async (req, res, next) => {
+  const role = req.user;
+  console.log("Hello");
+  if (role === "Job Seeker") {
+    return next(
+      new ErrorHandler("Job Seeker is not allowed to access this resouce", 400)
+    );
+  }
+  const { id } = req.params;
+  let job = await Job.findById(id);
+  if (!job) {
+    return next(new ErrorHandler("Oops, job not found!", 404));
+  }
+  await job.deleteOne();
+  res.status(200).json({
+    success: true,
+    msg: "Job deleted successfully",
+  });
+});
+module.exports = { getAllJobs, postJob, getMyJobs, updateJob, deleteJob };
