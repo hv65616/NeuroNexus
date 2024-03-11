@@ -68,7 +68,7 @@ const postJob = catchAsync(async (req, res, next) => {
 });
 
 const getMyJobs = catchAsync(async (req, res, next) => {
-  const role = req.user;
+  const {role} = req.user;
   if (role === "Job Seeker") {
     return next(
       new ErrorHandler("Job Seeker is not allowed to access this resouce", 400)
@@ -82,7 +82,7 @@ const getMyJobs = catchAsync(async (req, res, next) => {
 });
 
 const updateJob = catchAsync(async (req, res, next) => {
-  const role = req.user;
+  const {role} = req.user;
   if (role === "Job Seeker") {
     return next(
       new ErrorHandler("Job Seeker is not allowed to access this resouce", 400)
@@ -106,7 +106,7 @@ const updateJob = catchAsync(async (req, res, next) => {
 });
 
 const deleteJob = catchAsync(async (req, res, next) => {
-  const role = req.user;
+  const {role} = req.user;
   console.log("Hello");
   if (role === "Job Seeker") {
     return next(
