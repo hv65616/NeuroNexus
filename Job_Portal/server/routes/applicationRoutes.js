@@ -1,4 +1,21 @@
 const express = require("express");
 const { model } = require("mongoose");
-const Router = express.Router();
-module.exports = Router;
+const applicationController = require("../controllers/applicationController");
+const isAuth = require("../middlewares/auth");
+const router = express.Router();
+router.get(
+  "/jobseeker/getall",
+  isAuth,
+  applicationController.jobSeekerGetAllApplications
+);
+router.get(
+  "/employer/getall",
+  isAuth,
+  applicationController.employerGetAllApplications
+);
+router.delete(
+  "/delete/:id",
+  isAuth,
+  applicationController.jobSeekerDeleteApplication
+);
+module.exports = router;
