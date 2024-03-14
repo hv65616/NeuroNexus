@@ -23,17 +23,18 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/job", jobRouter);
-app.use("/api/v1/application", applicationRouter);
-
 app.use(
   fileupload({
     useTempFiles: true,
     tempFileDir: "/temp/",
   })
 );
+
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/job", jobRouter);
+app.use("/api/v1/application", applicationRouter);
+
+
 
 app.use(errorMiddleware)
 
