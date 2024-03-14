@@ -18,4 +18,5 @@ router.delete(
   isAuth,
   applicationController.jobSeekerDeleteApplication
 );
+router.post("/post", isAuth, applicationController.postApplication);
 module.exports = router;
