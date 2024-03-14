@@ -8,4 +8,5 @@ router.use(cookieparser());
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/logout", isauth, userController.logout);
+router.get("/getuser", isauth, userController.getUser);
 module.exports = router;
