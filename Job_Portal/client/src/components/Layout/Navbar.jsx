@@ -25,49 +25,54 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className={isAuthorized ? "navbarShow" : "navbarHide"}>
+      <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
         <div className="container">
           <div className="logo">
             <img src="/JobZee-logos__white.png" alt="Logo" />
           </div>
+
           <ul className={!show ? "menu" : "show-menu menu"}>
             <li>
               <Link to={"/"} onClick={() => setShow(false)}>
-                Home
+                HOME
               </Link>
             </li>
             <li>
               <Link to={"/job/getall"} onClick={() => setShow(false)}>
-                {user && user.role === "Employer"
-                  ? "Applicant's Applications"
-                  : "My Application"}
+                ALL JOBS
               </Link>
             </li>
             <li>
-              {user && user.role === "Employer" ? (
-                <>
-                  <li>
-                    <Link to={"/job/post"} onClick={() => setShow(false)}>
-                      Post New Job
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/job/me"} onClick={() => setShow(false)}>
-                      View Your Jobs
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <></>
-              )}
+              <Link to={"/applications/me"} onClick={() => setShow(false)}>
+                {user && user.role === "Employer"
+                  ? "APPLICANT'S APPLICATIONS"
+                  : "MY APPLICATIONS"}
+              </Link>
             </li>
-            <button onClick={handleLogout}>Logout</button>
+            {user && user.role === "Employer" ? (
+              <>
+                <li>
+                  <Link to={"/job/post"} onClick={() => setShow(false)}>
+                    POST NEW JOB
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/job/me"} onClick={() => setShow(false)}>
+                    VIEW YOUR JOBS
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <></>
+            )}
+
+            <button onClick={handleLogout}>LOGOUT</button>
           </ul>
           <div className="hamburger">
             <GiHamburgerMenu onClick={() => setShow(!show)}></GiHamburgerMenu>
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };

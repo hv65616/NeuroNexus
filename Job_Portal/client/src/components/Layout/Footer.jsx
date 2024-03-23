@@ -7,19 +7,20 @@ const Footer = () => {
   const { isAuthorized } = useContext(Context);
   return (
     <>
-      <footer className={isAuthorized ? "footerShow" : "footerHide"}></footer>
-      <div>&copy; All Right Reserver By Himanshu Verma</div>
-      <div>
-        <Link to={"/"} target="_blank">
-          <FaFacebookF></FaFacebookF>
-        </Link>
-        <Link to={"/"} target="_blank">
-          <FaLinkedin></FaLinkedin>
-        </Link>
-        <Link to={"/"} target="_blank">
-          <RiInstagramFill></RiInstagramFill>
-        </Link>
-      </div>
+      <footer className={isAuthorized ? "footerShow" : "footerHide"}>
+        <div>&copy; All Right Reserver By Himanshu Verma</div>
+        <div>
+          <Link to={"/"} target="_blank">
+            <FaFacebookF></FaFacebookF>
+          </Link>
+          <Link to={"/"} target="_blank">
+            <FaLinkedin></FaLinkedin>
+          </Link>
+          <Link to={"/"} target="_blank">
+            <RiInstagramFill></RiInstagramFill>
+          </Link>
+        </div>
+      </footer>
     </>
   );
 };
