@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
   const handleLogout = async () => {
     try {
@@ -15,8 +15,9 @@ const Navbar = () => {
         "http://localhost:4000/api/v1/user/logout",
         { withCredentials: true }
       );
-      toast.success(response.data.message);
-      setIsAuthorized(true);
+      // console.log(response);
+      toast.success(response.data.msg);
+      setIsAuthorized(false);
       navigateTo("/login");
     } catch (error) {
       toast.error(error.response.data.message);
