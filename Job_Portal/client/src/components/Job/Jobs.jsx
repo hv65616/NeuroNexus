@@ -11,7 +11,7 @@ const Jobs = () => {
       Axios.get("http://localhost:4000/api/v1/job/getall", {
         withCredentials: true,
       }).then((res) => {
-        setJobs(res.data.jobs);
+        setJobs(res.data);
       });
     } catch (error) {
       console.log(error);
@@ -33,7 +33,7 @@ const Jobs = () => {
                   <div className="card" key={ele._id}>
                     <p>{ele.title}</p>
                     <p>{ele.category}</p>
-                    <p>{ele.country}</p>
+                    <p>{ele.city}</p>
                     <Link to={`/job/${ele._id}`}>Job Details</Link>
                   </div>
                 );
