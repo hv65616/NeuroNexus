@@ -40,7 +40,7 @@ const JobDetails = () => {
               City: <span>{job.city}</span>
             </p>
             <p>
-              Location: <span>{job.description}</span>
+              Location: <span>{job.location}</span>
             </p>
             <p>
               Description: <span>{job.description}</span>
