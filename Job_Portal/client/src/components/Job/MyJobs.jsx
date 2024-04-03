@@ -48,7 +48,7 @@ const MyJobs = () => {
       })
       .then((res) => {
         toast.success(res.data.msg);
-        navigateTo("/job/me")
+        setEditingMode(null)
       })
       .catch((err) => {
         toast.error(err.response.data.message);
