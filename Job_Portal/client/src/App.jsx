@@ -50,7 +50,7 @@ const App = () => {
             element={<Application></Application>}
           ></Route>
           <Route
-            path="/application/me"
+            path="/applications/me"
             element={<MyApplication></MyApplication>}
           ></Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
