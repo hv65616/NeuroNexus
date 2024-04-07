@@ -1,10 +1,10 @@
 import React from "react";
 
-const ResumeModal = (imageUrl, onClose) => {
+const ResumeModal = ({imageUrl, onClose}) => {
   return (
     <>
       <div className="resume-modal">
-        <div className="model-content">
+        <div className="modal-content">
           <span className="close" onClick={onClose}>
             &times;
           </span>
